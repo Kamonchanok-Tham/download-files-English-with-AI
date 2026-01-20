@@ -1,3 +1,6 @@
+body{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
 .center{
     display: flex;
     flex-direction: column;
