@@ -14,7 +14,7 @@
             <h2>Upload file (test)</h2>
             <div class="file-row">
                 <span id="fileName" class="file-name">
-                    ยังไม่ได้เลือกไฟล์
+                    Select your file(1 file)
                 </span>
 
                 <label class="file-btn">
@@ -25,7 +25,21 @@
             <br />
             <button onclick=" upload()">Upload</button>
         </div>
+        <br />
         <div id="result"></div>
+        <div id="successOverlay" class="overlay hidden">
+            <div class="overlay-box">
+                <h2>✅ Upload สำเร็จ</h2>
+                <p id="successText">ไฟล์ถูกอัปโหลดเรียบร้อย</p>
+
+                <a id="fileLink" href="#" target="_blank" class="file-link">
+                    เปิดไฟล์
+                </a>
+
+                <button onclick="closeOverlay()">ปิด</button>
+            </div>
+        </div>
+
     </div>
 
 
@@ -57,14 +71,32 @@
             });
 
             const data = await res.json();
-
             if (data.success) {
-                document.getElementById("result").innerHTML = `
-                <p>upload success</p>
-                <a href="${data.url}" target="_blank">view</a>
-                `;
+                showSuccess(data.url);
             }
 
+            // if (data.success) {
+            //     document.getElementById("result").innerHTML = `
+            //     <p>upload success</p>
+            //     <a href="${data.url}" target="_blank">view</a>
+            //     `;
+            // }
+
+        }
+        function showSuccess(url) {
+            document.getElementById("fileLink").href = url;
+            document.getElementById("successOverlay").classList.remove("hidden");
+
+            // 🔄 ล้างค่า input + รีเซ็ตข้อความ
+            const fileInput = document.getElementById("file");
+            const fileName = document.getElementById("fileName");
+
+            fileInput.value = ""; // ล้างไฟล์ที่เลือก
+            fileName.textContent = "Select your file (1 file)";
+        }
+
+        function closeOverlay() {
+            document.getElementById("successOverlay").classList.add("hidden");
         }
     </script>
 
