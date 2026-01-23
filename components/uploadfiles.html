@@ -14,7 +14,8 @@
             <h2>Upload file (test)</h2>
             <div class="file-row">
                 <span id="fileName" class="file-name">
-                    Select your file(1 file)
+                    Select your file(1 file).
+                    <p>The file size must not exceed 10 MB.</p>
                 </span>
 
                 <label class="file-btn">
@@ -29,14 +30,14 @@
         <div id="result"></div>
         <div id="successOverlay" class="overlay hidden">
             <div class="overlay-box">
-                <h2>✅ Upload สำเร็จ</h2>
-                <p id="successText">ไฟล์ถูกอัปโหลดเรียบร้อย</p>
+                <h2>✅ Upload Success</h2>
+                <p id="successText">Success</p>
 
                 <a id="fileLink" href="#" target="_blank" class="file-link">
-                    เปิดไฟล์
+                    open file
                 </a>
 
-                <button onclick="closeOverlay()">ปิด</button>
+                <button onclick="closeOverlay()">close</button>
             </div>
         </div>
 
@@ -45,6 +46,7 @@
 
 
     <script>
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
         function showFileName() {
             const fileInput = document.getElementById("file");
             const fileName = document.getElementById("fileName");
@@ -52,13 +54,22 @@
             if (fileInput.files.length > 0) {
                 fileName.textContent = fileInput.files[0].name;
             } else {
-                fileName.textContent = "ยังไม่ได้เลือกไฟล์";
+                fileName.textContent = "undefined";
             }
         }
         async function upload() {
             const fileInput = document.getElementById("file");
             if (!fileInput.files.length) {
                 alert("select your file");
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            if (file.size > MAX_FILE_SIZE) {
+                alert("The file size must not exceed 10 MB.");
+                fileInput.value = "";
+                fileName.textContent = "Select your file (1 file)";
                 return;
             }
 
