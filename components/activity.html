@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity</title>
+</head>
+
+<body>
+    <h2>ALL FILES(TEST)</h2>
+    <div id="list">loading...</div>
+<script>
+const API = "https://tiny-darkness-94e3.kamonchanok-10292.workers.dev"
+
+async function loadActivity() {
+  const res = await fetch(`${API}/list`)
+  const data = await res.json()
+
+  const ul = document.getElementById("list")
+  ul.innerHTML = ""
+
+  data.forEach(file => {
+    const li = document.createElement("li")
+    li.innerHTML = `
+      📄 <a href="${file.url}" target="_blank">${file.name}</a>
+      <small>(${new Date(file.uploaded).toLocaleString()})</small>
+    `
+    ul.appendChild(li)
+  })
+}
+
+loadActivity()
+</script>
+
+</body>
+
+</html>
