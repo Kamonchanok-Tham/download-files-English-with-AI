@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Phase2</title>
     <link rel="stylesheet" href="../style/Phase2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -25,42 +25,119 @@
                 <div class="cenSub">
                     <div class="fx">
                         <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
-                        <h3>Scripts</h3>
+                        <div>
+                            <h3>Scripts</h3>
+                            <p class="file-note">The file size must not exceed 2.5 MB.</p>
+                        </div>
                     </div>
-                    <div>
-                        <button>Upload file (type)</button>
-                    </div>
+                    <span id="fileNameScript" class="file-name">
+                        <p>Select your file (1 file)</p>
+                    </span>
+                    <label>
+                        Select file
+                        <input type="file" id="fileScript" hidden accept=".pdf,.docx,.doc" onchange="showFileName('fileScript','fileNameScript')">
+                    </label>
                 </div>
                 <hr>
                 <div class="cenSub">
                     <div class="fx">
                         <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
-                        <h3>Chat logs/ recordings/ transcripts</h3>
+                        <div>
+                            <h3>Chat logs/ recordings/ transcripts</h3>
+                            <p class="file-note">The file size must not exceed 2.5 MB.</p>
+                        </div>
                     </div>
-                    <div>
-                        <button>Upload file (type)</button>
-                    </div>
+                    <span id="fileNameChat" class="file-name">
+                        <p>Select your file (1 file)</p>
+                    </span>
+                    <label>
+                        Select file
+                        <input type="file" id="fileChat" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName('fileChat','fileNameChat')">
+                    </label>
+
                 </div>
                 <hr>
-                <div class="cenSub">
+                <div class="cenSub mar">
                     <div class="fx">
                         <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
                         <h3>Self-rated performance scores(link)</h3>
                     </div>
                 </div>
                 <hr>
-                <div class="cenSub">
+                <div class="cenSub mar">
                     <div class="fx">
                         <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
                         <h3>Reflection(link)</h3>
                     </div>
                 </div>
             </div>
+            <button onclick="upload()">Upload</button>
         </div>
 
     </div>
 
 
 </body>
+
+<script>
+    const MAX_FILE_SIZE = 2.5 * 1024 * 1024;
+    function showFileName(inputId, nameId) {
+        const fileInput = document.getElementById(inputId);
+        const fileName = document.getElementById(nameId);
+
+        if (fileInput.files.length > 0) {
+            fileName.textContent = fileInput.files[0].name;
+        } else {
+            fileName.textContent = "Select your file (1 file)";
+        }
+    }
+    async function upload() {
+        const fileScript = document.getElementById("fileScript");
+        const fileChat = document.getElementById("fileChat");
+
+        if (!fileScript.files.length || !fileChat.files.length) {
+            alert("Please select both files.");
+            return;
+        }
+        const files = [
+            { input: fileScript, suffix: "_ScriptPhase2" },
+            { input: fileChat, suffix: "_ChatPhase2" }
+        ];
+        for (let item of files) {
+            const originalFile = item.input.files[0];
+
+            if (originalFile.size > MAX_FILE_SIZE) {
+                alert("The file size must not exceed 2.5 MB.");
+                return;
+            }
+
+            const name = originalFile.name.substring(0, originalFile.name.lastIndexOf("."));
+            const ext = originalFile.name.substring(originalFile.name.lastIndexOf("."));
+            const newFileName = `${name}${item.suffix}${ext}`;
+
+            const renamedFile = new File([originalFile], newFileName, {
+                type: originalFile.type,
+            });
+
+            const formData = new FormData();
+            formData.append("file", renamedFile);
+
+            await fetch("https://tiny-darkness-94e3.kamonchanok-10292.workers.dev/", {
+                method: "POST",
+                body: formData,
+            });
+
+            console.log("Uploaded:", newFileName);
+        }
+
+        alert("Both files uploaded successfully!");
+        // รีเซ็ตหลังอัปโหลด
+        fileScript.value = "";
+        fileChat.value = "";
+        document.getElementById("fileNameScript").textContent = "Select your file (1 file)";
+        document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
+
+    }
+</script>
 
 </html>
