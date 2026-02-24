@@ -11,33 +11,45 @@
 
 <body>
     <div class="page">
-        <div class="container">
-            <div class="bg-1">
-                <h3>This Week</h3>
-            </div>
-            <h2>Phase 1: Orientation</h2>
-            <div class="box1">
-                <hr>
-                <div class="cen">
-                    <h3>Getting to know you</h3>
-                    <p>link: zoom</p>
+        <div class="fx">
+            <div class="container">
+                <div class="bg-1">
+                    <h3>This Week</h3>
                 </div>
-                <hr>
-                <div class="cen">
-                    <div>
-                    <h3>Baseline script submission</h3>
-                    <p class="file-note">The file size must not exceed 2.5 MB.</p>                        
+                <h2>Phase 1: Orientation</h2>
+                <div class="box1">
+                    <hr>
+                    <div class="cen">
+                        <h3>Getting to know you</h3>
+                        <p>link: zoom</p>
                     </div>
-                    <span id="fileName" class="file-name">
-                        <p>Select your file (1 file)</p>
-                    </span>
-                    <label>
-                        Select file
-                        <input type="file" id="file" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName()">
-                    </label>
+                    <hr>
+                    <div class="cen">
+                        <div>
+                            <h3>Baseline script submission</h3>
+                            <p class="file-note">The file size must not exceed 2.5 MB.</p>
+                        </div>
+                        <span id="fileName" class="file-name">
+                            <p>Select your file (1 file)</p>
+                        </span>
+                        <label>
+                            Select file
+                            <input type="file" id="file" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName()">
+                        </label>
+                    </div>
                 </div>
+                <button onclick=" upload()">Upload</button>
             </div>
-            <button onclick=" upload()">Upload</button>
+            <div class="block2">
+                <div class="container2">
+                    <h3>Next Phase</h3>
+                    <p>March 21</p>
+                </div>
+                <span>
+                    <img src="../assets/commu.png" alt="" class="imgMu">
+                </span>
+            </div>
+
         </div>
     </div>
 
@@ -91,7 +103,7 @@
         // รีเซ็ตหลังอัปโหลด
         fileInput.value = "";
         fileName.textContent = "Select your file (1 file)";
-        
+
     }
 </script>
 
