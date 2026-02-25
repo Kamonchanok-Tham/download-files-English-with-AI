@@ -58,7 +58,7 @@
         fileName.textContent = "Select your file (1 file)";
 
     }
-    //Phase2
+    //Phase2_Topic1
     async function uploadPhase2() {
         const fileScript = document.getElementById("fileScript");
         const fileChat = document.getElementById("fileChat");
@@ -67,17 +67,85 @@
             alert("Please select both files.");
             return;
         }
+
+        const scriptFile = fileScript.files[0];
+        const chatFile = fileChat.files[0];
+        if (scriptFile.size > MAX_FILE_SIZE || chatFile.size > MAX_FILE_SIZE) {
+            alert("The file size must not exceed 2.5 MB.");
+
+            fileScript.value = "";
+            fileChat.value = "";
+
+            document.getElementById("fileNameScript").textContent = "Select your file (1 file)";
+            document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
+
+            return;
+        }
+
         const files = [
-            { input: fileScript, suffix: "_ScriptPhase2" },
-            { input: fileChat, suffix: "_ChatPhase2" }
+            { input: fileScript, suffix: "_ScriptPhase2Topic1" },
+            { input: fileChat, suffix: "_ChatPhase2Topic1" }
         ];
         for (let item of files) {
             const originalFile = item.input.files[0];
 
-            if (originalFile.size > MAX_FILE_SIZE) {
-                alert("The file size must not exceed 2.5 MB.");
-                return;
-            }
+            const name = originalFile.name.substring(0, originalFile.name.lastIndexOf("."));
+            const ext = originalFile.name.substring(originalFile.name.lastIndexOf("."));
+            const newFileName = `${name}${item.suffix}${ext}`;
+
+            const renamedFile = new File([originalFile], newFileName, {
+                type: originalFile.type,
+            });
+
+            const formData = new FormData();
+            formData.append("file", renamedFile);
+
+            await fetch("https://tiny-darkness-94e3.kamonchanok-10292.workers.dev/", {
+                method: "POST",
+                body: formData,
+            });
+
+            console.log("Uploaded:", newFileName);
+        }
+
+        alert("Both files uploaded successfully!");
+        // รีเซ็ตหลังอัปโหลด
+        fileScript.value = "";
+        fileChat.value = "";
+        document.getElementById("fileNameScript").textContent = "Select your file (1 file)";
+        document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
+    }
+
+    //Phase2_Topic2
+    async function uploadPhase2Topic2() {
+        const fileScript = document.getElementById("fileScript");
+        const fileChat = document.getElementById("fileChat");
+
+        if (!fileScript.files.length || !fileChat.files.length) {
+            alert("Please select both files.");
+            return;
+        }
+
+        const scriptFile = fileScript.files[0];
+        const chatFile = fileChat.files[0];
+        if (scriptFile.size > MAX_FILE_SIZE || chatFile.size > MAX_FILE_SIZE) {
+            alert("The file size must not exceed 2.5 MB.");
+
+            fileScript.value = "";
+            fileChat.value = "";
+
+            document.getElementById("fileNameScript").textContent = "Select your file (1 file)";
+            document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
+
+            return;
+        }
+
+        const files = [
+            { input: fileScript, suffix: "_ScriptPhase2Topic2" },
+            { input: fileChat, suffix: "_ChatPhase2Topic2" }
+        ];
+        for (let item of files) {
+            const originalFile = item.input.files[0];
 
             const name = originalFile.name.substring(0, originalFile.name.lastIndexOf("."));
             const ext = originalFile.name.substring(originalFile.name.lastIndexOf("."));

@@ -1,13 +1,10 @@
 body{
-    /* display: flex;
-    flex-direction: column; */
-    /* align-items: center; */
     background-color: #f0f7fe;
     font-family: Arial, Helvetica, sans-serif;
 }
 h3{
     color: rgb(37, 95, 228);
-        margin: 5px 0 5px 0;
+    margin: 5px 0 5px 0;
 }
 h2{
     margin-left: 30px;
@@ -22,25 +19,6 @@ hr{
 .file-note{
     color: rgb(186, 199, 207);
     margin: 0;
-}
-.mar{
-    padding: 0 0 5px 0;
-    /* margin: 5px 0 0 0; */
-}
-label{
-    /* background-color: #25d02b; */
-    background-color: rgb(37, 95, 228);
-    padding: 10px;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    
-}
-label:hover{
-    background-color: rgb(85, 136, 255);
-    transform: scale(1.08);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    transition: all 0.2s ease;
 }
 .container{
     border-radius: 10px;
@@ -65,54 +43,34 @@ label:hover{
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     transition: all 0.2s ease;
 }
-.box1{
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 20px;
-}
-.box1 hr{
-    width: 100%;
-    margin: 0 0 10px 0;
-
-}
-.cen{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-left: 10px;
-}
-.cen p {
-    margin-top: 0;
-    margin-bottom: 5px;
-    margin-left: 35px;
-}
-.cenSub{
-    display: flex;
-    /* flex-direction: column; */
-    align-items: start;
-    margin-left: 10px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.cenSub button{
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+label{
+    /* background-color: #25d02b; */
     background-color: rgb(37, 95, 228);
+    padding: 10px;
     color: white;
     font-weight: bold;
+    border-radius: 5px;
+    
 }
-.cenSub button:hover{
+label:hover{
     background-color: rgb(85, 136, 255);
     transform: scale(1.08);
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
 }
-
-.move-img{
-    /* margin-top: 10px;  */
-    margin-right: 5px;
+.fx{
+    display: flex;
+    justify-content: center;
+}
+.fx-img{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.fx-img img{
+    max-width: 30px;
+    max-height: 30px;
 }
 .bg-1{
     display: flex;
@@ -128,22 +86,28 @@ label:hover{
     color: white;
     font-weight: bold;
 }
-.fx{
+.box1{
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px;
 }
-.fx-img{
+.box1 hr{
+    width: 100%;
+    margin: 0 0 10px 0;
+
+}
+.cen{
     display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    /* flex-direction: column; */
+    align-items: start;
+    margin-left: 10px;
+    justify-content: space-between;
 }
-.fx-img img{
-    max-width: 30px;
-    max-height: 30px;
+.cen p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    /* margin-left: 35px; */
 }
 
 .page {
@@ -160,35 +124,33 @@ label:hover{
 }
 @media (max-width: 600px){
     .cen{
-        margin-left: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        margin: 0;
     }
     h2{
-        margin-left: 20px;
+        margin-left: 15px;
+        width: 250px;
     }
-  .cenSub{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    margin: 0;
-  }
-
-  .fx-img{
+    .fx-img{
     width: 100%;
-  }
+    }
 
-  .file-name{
-    width: 100%;
-  }
-  label{
-    background-color: rgb(92, 195, 135);
-  }
+    .file-name{
+        width: 100%;
+    }
+    label{
+     background-color: rgb(92, 195, 135);
+    }
+    label:hover{
+     background-color: rgb(138, 222, 173);
+    }
 
-  .cenSub label{
+    .cen label{
     display: flex;
     width: 92%;
     justify-content: center;
     margin-left: 0;
   }
-
 }
-
