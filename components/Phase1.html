@@ -20,11 +20,6 @@
                 <div class="box1">
                     <hr>
                     <div class="cen">
-                        <h3>Getting to know you</h3>
-                        <p>link: zoom</p>
-                    </div>
-                    <hr>
-                    <div class="cen">
                         <div>
                             <h3>Baseline script submission</h3>
                             <p class="file-note">The file size must not exceed 2.5 MB.</p>
@@ -34,20 +29,11 @@
                         </span>
                         <label>
                             Select file
-                            <input type="file" id="file" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName()">
+                            <input type="file" id="file" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileNameOneFile()">
                         </label>
                     </div>
                 </div>
-                <button onclick=" upload()">Upload</button>
-            </div>
-            <div class="block2">
-                <div class="container2">
-                    <h3>Next Phase</h3>
-                    <p>March 21</p>
-                </div>
-                <span>
-                    <img src="../assets/commu.png" alt="" class="imgMu">
-                </span>
+                <button onclick=" uploadPhase1()">Upload</button>
             </div>
 
         </div>
@@ -55,56 +41,6 @@
 
 
 </body>
-
-<script>
-    const MAX_FILE_SIZE = 2.5 * 1024 * 1024;
-    function showFileName() {
-        const fileInput = document.getElementById("file");
-        const fileName = document.getElementById("fileName");
-
-        if (fileInput.files.length > 0) {
-            fileName.textContent = fileInput.files[0].name;
-        } else {
-            fileName.textContent = "undefined";
-        }
-    }
-    async function upload() {
-        const fileInput = document.getElementById("file");
-        if (!fileInput.files.length) {
-            alert("select your file");
-            return;
-        }
-        const file = fileInput.files[0];
-        if (file.size > MAX_FILE_SIZE) {
-            alert("The file size must not exceed 10 MB.");
-            fileInput.value = "";
-            fileName.textContent = "Select your file(1 file)"
-            return;
-        }
-        const originalFile = fileInput.files[0];
-        const name = originalFile.name.substring(0, originalFile.name.lastIndexOf("."));
-        const ext = originalFile.name.substring(originalFile.name.lastIndexOf("."));
-        const newFileName = `${name}_Baseline${ext}`;
-
-        const renamedFile = new File([originalFile], newFileName, {
-            type: originalFile.type,
-        });
-        const formData = new FormData();
-        formData.append("file", renamedFile);
-
-        const res = await fetch("https://tiny-darkness-94e3.kamonchanok-10292.workers.dev/", {
-            method: "POST",
-            body: formData,
-        });
-
-        const data = await res.json();
-        console.log("Uploaded as:", newFileName);
-
-        // รีเซ็ตหลังอัปโหลด
-        fileInput.value = "";
-        fileName.textContent = "Select your file (1 file)";
-
-    }
-</script>
+<script src="sc.js"></script>
 
 </html>

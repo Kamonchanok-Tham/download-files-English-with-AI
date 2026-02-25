@@ -35,7 +35,7 @@
                     </span>
                     <label>
                         Select file
-                        <input type="file" id="fileScript" hidden accept=".pdf,.docx,.doc" onchange="showFileName('fileScript','fileNameScript')">
+                        <input type="file" id="fileScript" hidden accept=".pdf,.docx,.doc" onchange="showFileNameTwoFiles('fileScript','fileNameScript')">
                     </label>
                 </div>
                 <hr>
@@ -52,7 +52,7 @@
                     </span>
                     <label>
                         Select file
-                        <input type="file" id="fileChat" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileName('fileChat','fileNameChat')">
+                        <input type="file" id="fileChat" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="showFileNameTwoFiles('fileChat','fileNameChat')">
                     </label>
 
                 </div>
@@ -71,15 +71,15 @@
                     </div>
                 </div>
             </div>
-            <button onclick="upload()">Upload</button>
+            <button onclick="uploadPhase2()">Upload</button>
         </div>
 
     </div>
 
 
 </body>
-
-<script>
+<script src="sc.js"></script>
+<!-- <script>
     const MAX_FILE_SIZE = 2.5 * 1024 * 1024;
     function showFileName(inputId, nameId) {
         const fileInput = document.getElementById(inputId);
@@ -138,6 +138,6 @@
         document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
 
     }
-</script>
+</script> -->
 
 </html>
