@@ -110,6 +110,35 @@ label:hover{
     /* margin-left: 35px; */
 }
 
+
+/* ปุ่มตอนกำลังโหลด */
+button.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Spinner ในปุ่ม */
+button.loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  border: 3px solid white;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 .page {
   opacity: 0;
   transform: translateY(30px);
