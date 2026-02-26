@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/Tem.css">
+    <title>Phase2-Topic4</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="fx">
+            <div class="container">
+                <div class="bg-1">
+                    <h3>This Week</h3>
+                </div>
+                <div class="cen">
+                    <h2>Topic 4: Talking about Your Study or Career Goals</h2>
+                </div>
+                <div class="box1">
+                    <hr>
+                    <div class="cen">
+                        <div class="fx-img">
+                            <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
+                            <div>
+                                <h3>Scripts</h3>
+                                <p class="file-note">The file size must not exceed 2.5 MB.</p>
+                            </div>
+                        </div>
+                        <span id="fileNameScript" class="file-name">
+                            <p>Select your file (1 file)</p>
+                        </span>
+                        <label>
+                            Select file
+                            <input type="file" id="fileScript" hidden accept=".pdf,.docx,.doc"
+                                onchange="showFileNameTwoFiles('fileScript','fileNameScript')">
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="cen">
+                        <div class="fx-img">
+                            <img src="../assets/google-docs.png" alt="" width="30px" height="30px" class="move-img" />
+                            <div>
+                                <h3>Chat logs/ recordings/ transcripts</h3>
+                                <p class="file-note">The file size must not exceed 2.5 MB.</p>
+                            </div>
+                        </div>
+                        <span id="fileNameChat" class="file-name">
+                            <p>Select your file (1 file)</p>
+                        </span>
+                        <label>
+                            Select file
+                            <input type="file" id="fileChat" hidden accept=".pdf,.jpg,.jpeg,.png"
+                                onchange="showFileNameTwoFiles('fileChat','fileNameChat')">
+                        </label>
+                    </div>
+                </div>
+                
+                <button id="uploadBtn" onclick="uploadPhase2('_ScriptPhase2Topic4','_ChatPhase2Topic4')">Upload</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="sc.js"></script>
+
+</html>
