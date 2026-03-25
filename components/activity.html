@@ -2,14 +2,79 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activity</title>
+  <meta charset="UTF-8">
+  <title>Activity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .phase {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .topic {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #f0f4ff;
+    }
+
+    .section-title {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 6px 0;
+      background: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    li:hover {
+      transform: translateX(5px);
+    }
+
+    a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: 500;
+    }
+
+    small {
+      color: #777;
+      margin-left: 5px;
+    }
+  </style>
 </head>
 
 <body>
-    <h2>ALL FILES(TEST)</h2>
-    <div id="list">loading...</div>
+
+<h1>📁 Activity Files</h1>
+<div id="container"></div>
+
 <script>
 const API = "https://tiny-darkness-94e3.kamonchanok-10292.workers.dev"
 
@@ -17,22 +82,79 @@ async function loadActivity() {
   const res = await fetch(`${API}/list`)
   const data = await res.json()
 
-  const ul = document.getElementById("list")
-  ul.innerHTML = ""
+  const container = document.getElementById("container")
+  container.innerHTML = ""
+
+  const grouped = {}
 
   data.forEach(file => {
-    const li = document.createElement("li")
-    li.innerHTML = `
-      📄 <a href="${file.url}" target="_blank">${file.name}</a>
-      <small>(${new Date(file.uploaded).toLocaleString()})</small>
-    `
-    ul.appendChild(li)
+    const match = file.name.match(/_(Script|Chat)Phase(\d+)Topic(\d+)/)
+    if (!match) return
+
+    const type = match[1]
+    const phase = match[2]
+    const topic = match[3]
+
+    if (!grouped[phase]) grouped[phase] = {}
+    if (!grouped[phase][topic]) {
+      grouped[phase][topic] = { Script: [], Chat: [] }
+    }
+
+    grouped[phase][topic][type].push(file)
   })
+
+  Object.keys(grouped).sort().forEach(phase => {
+    const phaseDiv = document.createElement("div")
+    phaseDiv.className = "phase"
+    phaseDiv.innerHTML = `<h2>📦 Phase ${phase}</h2>`
+
+    Object.keys(grouped[phase]).sort().forEach(topic => {
+      const topicDiv = document.createElement("div")
+      topicDiv.className = "topic"
+      topicDiv.innerHTML = `<h3>📌 Topic ${topic}</h3>`
+
+      const scriptUl = document.createElement("ul")
+      const chatUl = document.createElement("ul")
+
+      grouped[phase][topic].Script.forEach(file => {
+        scriptUl.appendChild(createFileItem(file))
+      })
+
+      grouped[phase][topic].Chat.forEach(file => {
+        chatUl.appendChild(createFileItem(file))
+      })
+
+      const scriptTitle = document.createElement("div")
+      scriptTitle.className = "section-title"
+      scriptTitle.textContent = "📜 Script"
+
+      const chatTitle = document.createElement("div")
+      chatTitle.className = "section-title"
+      chatTitle.textContent = "💬 Chat"
+
+      topicDiv.appendChild(scriptTitle)
+      topicDiv.appendChild(scriptUl)
+      topicDiv.appendChild(chatTitle)
+      topicDiv.appendChild(chatUl)
+
+      phaseDiv.appendChild(topicDiv)
+    })
+
+    container.appendChild(phaseDiv)
+  })
+}
+
+function createFileItem(file) {
+  const li = document.createElement("li")
+  li.innerHTML = `
+    📄 <a href="${file.url}" target="_blank">${file.name}</a>
+    <small>(${new Date(file.uploaded).toLocaleString()})</small>
+  `
+  return li
 }
 
 loadActivity()
 </script>
 
 </body>
-
 </html>
