@@ -106,7 +106,7 @@ h4{
     background-color: #adffe4;
 }
 
-button {
+.submitEval{
   padding: 10px;
   background: rgb(37, 95, 228);
   color: white;
