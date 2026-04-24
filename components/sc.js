@@ -80,14 +80,14 @@
         const fileChat = document.getElementById("fileChat");
 
         if (!fileScript.files.length || !fileChat.files.length) {
-            alert("Please select both files.");
+            showToast("Please select both files.");
             return;
         }
 
         const scriptFile = fileScript.files[0];
         const chatFile = fileChat.files[0];
         if (scriptFile.size > MAX_FILE_SIZE || chatFile.size > MAX_FILE_SIZE) {
-            alert("The file size must not exceed 2.5 MB.");
+            showToast("The file size must not exceed 2.5 MB.");
             resetFiles();
             return;
         }
@@ -122,11 +122,10 @@
 
             console.log("Uploaded:", newFileName);
         }
-
-        alert("Both files uploaded successfully!");
+        showToast("successfully!");
         resetFiles(); 
         }catch(error){
-            alert("Upload failed.");
+            showToast("Upload failed.");
 
         }
         btn.classList.remove("loading");
@@ -139,3 +138,14 @@
         document.getElementById("fileNameScript").textContent = "Select your file (1 file)";
         document.getElementById("fileNameChat").textContent = "Select your file (1 file)";
     }
+
+    function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000); // หายเอง 2 วิ
+}

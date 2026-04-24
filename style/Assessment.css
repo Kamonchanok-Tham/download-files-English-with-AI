@@ -1,0 +1,218 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f5f5;
+}
+.container-eval{
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.evaluation {
+  background: white;
+  padding: 20px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.criteria {
+  margin-bottom: 15px;
+}
+.top{
+    display: flex;
+    gap: 20px;
+}
+h4{
+    margin-bottom: 0;
+}
+.labelThai{
+    margin-bottom: 5px;
+}
+.labelThai span{
+    color: #5f50df;
+}
+.stu-name{
+    border: gray;
+}
+.w{
+    display: flex;
+    align-items: center;
+    background-color: #e3e1ff;
+    color: #5f50df;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.levels{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+.hidden-radio{
+    display: none;
+}
+.ev {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  height: 100px;
+  min-height: 50px;
+  max-width: 400px;
+  width: 300px;
+  margin: 5px 0;
+  border-radius: 15px;
+  color: black;
+  font-weight: bold;
+  padding: 20px;
+  /* align-items: center; */
+}
+.ev span{
+    margin-top: 10px;
+    font-weight: lighter;
+}
+.ev:hover{
+    transform: scale(1.01);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+}
+.level-1{
+    background-color: rgb(255, 244, 247);
+    border: #ffbaba 3px solid;
+}
+.level-1:hover{
+    background-color: #ffbaba;
+}
+.level-1:has(input:checked){
+    background-color: #ffbaba;
+}
+.level-2{
+    background-color: rgb(255, 254, 243);
+    border: #fff675 3px solid;
+}
+
+.level-2:hover{
+    background-color: #fff9a4;
+}
+.level-2:has(input:checked){
+    background-color: #fff9a4;
+}
+.level-3{
+    background-color: rgb(236, 255, 252);
+    border: #adffe4 3px solid;
+}
+.level-3:hover{
+    background-color: #adffe4;
+}
+.level-3:has(input:checked){
+    background-color: #adffe4;
+}
+
+button {
+  padding: 10px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* card */
+.student-card {
+  background: #f7f8fb;
+  border-radius: 20px;
+  padding: 25px;
+  margin: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* header */
+.student-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.student-header h2 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* icon */
+.icon {
+  width: 35px;
+  height: 35px;
+  background: #e8e6ff;
+  color: #5f50df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* input */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.input-group input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f9fafc;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #aaa;
+}
+
+.input-group input:focus {
+  border: 1px solid #5f50df;
+  background: #fff;
+}
+
+.toast {
+  position: fixed;
+  top: 20px;              /* ✅ อยู่ด้านบน */
+  left: 50%;
+  transform: translateX(-50%); /* กลางแนวนอน */
+
+  background: #5f50df;
+  color: white;
+  padding: 20px 100px;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+
+  z-index: 9999;
+}
+
+/* ตอนแสดง */
+.toast.show {
+  opacity: 1;
+  top: 40px; /* เด้งลงมานิดนึง */
+}
+
+@media (max-width: 600px){
+    .levels{
+        display: flex;
+        flex-direction: column;
+    }
+    .ev{
+        width: inherit;
+        height: inherit;
+    }
+}
