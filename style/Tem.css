@@ -132,6 +132,43 @@ button.loading::after {
   vertical-align: middle;
 }
 
+.toast {
+  position: fixed;
+  top: 20px;              /* ✅ อยู่ด้านบน */
+  left: 50%;
+  transform: translateX(-50%); /* กลางแนวนอน */
+
+  background: #5f50df;
+  color: white;
+  padding: 20px 100px;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+
+  z-index: 9999;
+}
+
+/* ตอนแสดง */
+.toast.show {
+  opacity: 1;
+  top: 40px; /* เด้งลงมานิดนึง */
+}
+
+@media (max-width: 600px){
+    .levels{
+        display: flex;
+        flex-direction: column;
+    }
+    .ev{
+        width: inherit;
+        height: inherit;
+    }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
